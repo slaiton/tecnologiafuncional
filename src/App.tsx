@@ -1,30 +1,86 @@
 
 import Home from './components/Home/Home';
-import { useState } from "react";
+import Header from './components/Header/Header';
+import { useState, useEffect } from "react";
 import './App.css'
-import About from './components/About/About';
+// import About from './components/About/About';
 import Services from './components/Services/Services';
 
+import Contact from './components/Contact/Contact';
+
 const App: React.FC = () => {
-  // const [count, setCount] = useState(0)
-  
   const [currentSection, setCurrentSection] = useState<string>("#home");
+  const [position, setPosition] = useState({ x: 0, y: 0 });
+  
+  useEffect(() => {
+    const handleMouseMove = (event:any) => {
+      console.log(event);
+      setPosition({ x: event.clientX, y: event.clientY });
+    };
 
-  const handleNavigate = (section: string) => { 
-    setCurrentSection(section);
-  };
+    window.addEventListener("mousemove", handleMouseMove);
 
+    return () => {
+      window.removeEventListener("mousemove", handleMouseMove);
+    };
+  }, []);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const sections = ["#home", "#about", "#services"];
+      const scrollPosition = window.scrollY + window.innerHeight / 2;
+      currentSection
+      for (const section of sections) {
+        const element = document.getElementById(section.substring(1));
+        if (element) {
+          const { top, bottom } = element.getBoundingClientRect();
+          if (top <= scrollPosition && bottom >= scrollPosition) {
+            setCurrentSection(section);
+            break;
+          }
+        }
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   return (
+
     <div className="app">
-    {/* <Header onNavigate={handleNavigate} /> */}
-    <div className="sections">
-      {currentSection === "#home" && <Home onNavigate={handleNavigate} />}
-      {currentSection === "#about" && <About onNavigate={handleNavigate} />}
-      {currentSection === "#services" && <Services onNavigate={handleNavigate} />}
-    </div>
-    </div>
-  )
-}
+
+<Header/>
+      
+
+      <div className="mouse-follower">
+        <div
+          className="circle"
+          style={{
+            transform: `translate(${position.x}px, ${position.y}px)`,
+          }}
+        ></div>
+      </div>
+
+
+      <div className="sections">
+        <section id="home" className="min-h-screen">
+          <Home onNavigate={setCurrentSection} />
+        </section>
+
+        <section id="services" className="min-h-screen flex justify-center items-center bg-cover bg-center" style={{ backgroundImage: "url('/fondo3.jpeg')" }}>
+          <Services onNavigate={setCurrentSection} />
+        </section>
+
+
+        <section id="contact" className="min-h-screen">
+          <Contact onNavigate={setCurrentSection} />
+        </section>
+
+      </div>
+
+    </div >
+  );
+};
 
 export default App

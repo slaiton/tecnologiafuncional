@@ -1,9 +1,5 @@
 @import "tailwindcss";
 
-* {
-  padding: 0;
-  margin: 0;
-}
 
 :root {
   font-family: Roboto, system-ui, Avenir, Helvetica, Arial, sans-serif;
@@ -20,14 +16,14 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
-a {
+/* a {
   font-weight: 500;
   color: #646cff;
   text-decoration: inherit;
 }
 a:hover {
   color: #535bf2;
-}
+} */
 
 body {
   margin: 0;
@@ -72,4 +68,16 @@ button:focus-visible {
   button {
     background-color: #f9f9f9;
   }
+}
+
+.opacity-60 {
+  opacity: 60%;
+}
+
+.opacity-80 {
+  opacity: 80%;
+}
+
+.bg-black-80 {
+  background-color: #1a1a1ab6;
 }
