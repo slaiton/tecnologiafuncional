@@ -12,12 +12,12 @@ const Home: React.FC<HomeProps> = ({ onNavigate }) => {
 
 
   return (
-    <div className="relative h-screen w-screen">
+    <div className="relative w-full h-full">
       <motion.video
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 1.5 }}
-        className="absolute top-0 left-0 w-screen h-full object-cover"
+        className="min-h-screen bg-cover bg-center object-cover"
         src="../video.mp4"
         autoPlay
         loop
@@ -41,6 +41,21 @@ const Home: React.FC<HomeProps> = ({ onNavigate }) => {
           </div>
         </motion.div>
       </div>
+
+
+      {/* <div className="absolute top-0 left-0 w-full h-full bg-black bg-opacity-60 flex justify-center items-center">
+        <motion.h1
+          initial={{ opacity: 0, y: 50 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1, ease: "easeOut" }}
+          className="text-white text-3xl md:text-5xl font-bold text-center px-4"
+        >
+          Bienvenido a Nuestra Plataforma
+        </motion.h1>
+      </div> */}
+
+
+
       <div
         className="absolute bottom-8 left-1/2 transform -translate-x-1/2 cursor-pointer animate-bounce"
         onClick={() => onNavigate("#services")}

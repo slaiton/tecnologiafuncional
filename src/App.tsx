@@ -68,7 +68,7 @@ const App: React.FC = () => {
           <Home onNavigate={setCurrentSection} />
         </section>
 
-        <section id="services" className="min-h-screen flex justify-center items-center bg-cover bg-center" style={{ backgroundImage: "url('/fondo3.jpeg')" }}>
+        <section id="services" className="min-h-screen bg-cover bg-center" style={{ backgroundImage: "url('/fondo3.jpeg')" }}>
           <Services onNavigate={setCurrentSection} />
         </section>
 

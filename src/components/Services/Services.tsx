@@ -1,37 +1,36 @@
 import React from "react";
 import { motion } from "framer-motion";
-import { FaLightbulb , FaRocket , FaMedal  } from "react-icons/fa";
-
-import './Services.css'
+import { FaLightbulb, FaRocket, FaMedal } from "react-icons/fa";
 import { MdSpeed } from "react-icons/md";
 
+import "./Services.css";
 
 const services = [
-  { id: 1, title: "Innovación", icon: <FaLightbulb size={40} className="text-blue-500" />, description : "Creamos software y aplicaciones innovadoras y eficientes." },
-  { id: 2, title: "Transformación", icon: <FaRocket size={40} className="text-green-500" />, description : "Transformamos ideas en productos digitales de alto rendimiento." },
-  { id: 3, title: "Excelencia", icon: <FaMedal size={40} className="text-red-500" />, description : "Enfoque en calidad y satisfacción del cliente." },
-  { id: 3, title: "Eficiencia", icon: <MdSpeed  size={40} className="text-red-500" />, description : "Optimizamos y agilizamos todos tus procesos." },
+  { id: 1, title: "Innovación", icon: <FaLightbulb size={40} className="text-blue-500" />, description: "Creamos software y aplicaciones innovadoras y eficientes." },
+  { id: 2, title: "Transformación", icon: <FaRocket size={40} className="text-green-500" />, description: "Transformamos ideas en productos digitales de alto rendimiento." },
+  { id: 3, title: "Excelencia", icon: <FaMedal size={40} className="text-red-500" />, description: "Enfoque en calidad y satisfacción del cliente." },
+  { id: 4, title: "Eficiencia", icon: <MdSpeed size={40} className="text-yellow-500" />, description: "Optimizamos y agilizamos todos tus procesos." },
 ];
 
 interface ServiceProps {
-  onNavigate: (section: string) => void;
+  onNavigate?: (section: string) => void;
 }
 
-const Services: React.FC<ServiceProps> = ({}) => {
+const Services: React.FC<ServiceProps> = () => {
   return (
-    <section id="services-section" className="flex flex-col md:flex-row justify-center items-center mx-8 py-12 gap-16"
-    >
+    <section id="services-section">
+      <div className="flex flex-col items-center mx-4 py-12 gap-10 sm:mx-8 sm:gap-16">
+
       {/* Columna izquierda con título y descripción */}
       <motion.div 
         initial={{ opacity: 0, y: 150 }} 
         animate={{ opacity: 1, y: 0 }} 
         transition={{ duration: 0.8, ease: "easeOut" }}
-        className="w-full md:w-2/5 text-center flex flex-col items-center"
+        className="w-full sm:w-3/4 md:w-2/5 text-center flex flex-col items-center px-4"
       >
-        <h2 className="text-3xl font-bold mb-4">¿ Por que elergirnos ?</h2>
-        <p className="text-lg text-gray-600 max-w-md">
-          Somos un equipo altamente calificado, con metodologías
-          ágiles y estructuradas.
+        <h2 className="text-2xl sm:text-3xl font-bold mb-4">¿Por qué elegirnos?</h2>
+        <p className="text-md sm:text-lg text-gray-600 max-w-md">
+          Somos un equipo altamente calificado, con metodologías ágiles y estructuradas.
         </p>
       </motion.div>
       
@@ -41,7 +40,7 @@ const Services: React.FC<ServiceProps> = ({}) => {
         whileInView={{ opacity: 1, y: 0 }} 
         transition={{ duration: 0.8, ease: "easeOut", staggerChildren: 0.2 }}
         viewport={{ once: true }}
-        className="w-full md:w-3/5 grid grid-cols-1 sm:grid-cols-2 gap-12"
+        className="w-full sm:w-3/4 md:w-3/5 grid grid-cols-1 sm:grid-cols-2 gap-6 sm:gap-12 px-4"
       >
         {services.map((service, index) => (
           <motion.div 
@@ -60,11 +59,9 @@ const Services: React.FC<ServiceProps> = ({}) => {
           </motion.div>
         ))}
       </motion.div>
+      </div>
     </section>
   );
 };
 
-
-
-export default Services
-
+export default Services;
