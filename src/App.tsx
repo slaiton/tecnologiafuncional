@@ -7,6 +7,7 @@ import './App.css'
 import Services from './components/Services/Services';
 
 import Contact from './components/Contact/Contact';
+import Footer from './components/Footer/Footer';
 
 const App: React.FC = () => {
   const [currentSection, setCurrentSection] = useState<string>("#home");
@@ -50,8 +51,7 @@ const App: React.FC = () => {
 
     <div className="app">
 
-<Header/>
-      
+     <Header/>
 
       <div className="mouse-follower">
         <div
@@ -78,6 +78,8 @@ const App: React.FC = () => {
         </section>
 
       </div>
+
+     <Footer />
 
     </div >
   );
