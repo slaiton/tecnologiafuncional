@@ -31,7 +31,7 @@ const Contact: React.FC<ContactProps> = ({ }) => {
     
     <div className="w-full h-screen flex justify-center items-center bg-black-80">
 
-        <div className="max-w-lg flex items-center justify-center bg-gray-900 p-8 rounded-lg shadow-lg">
+        <div className="w-80 left-10 max-w-lg flex items-center justify-center bg-gray-900 p-8 rounded-lg shadow-lg">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}

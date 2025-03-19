@@ -64,16 +64,16 @@ const App: React.FC = () => {
 
 
       <div className="sections">
-        <section id="home" className="min-h-screen">
+        <section id="home" className="min-h-screen w-screen">
           <Home onNavigate={setCurrentSection} />
         </section>
 
-        <section id="services" className="min-h-screen bg-cover bg-center" style={{ backgroundImage: "url('/fondo3.jpeg')" }}>
+        <section id="services" className="min-h-screen w-screen bg-cover bg-center flex flex-col justify-center" style={{ backgroundImage: "url('/fondo3.jpeg')" }}>
           <Services onNavigate={setCurrentSection} />
         </section>
 
 
-        <section id="contact" className="min-h-screen">
+        <section id="contact" className="min-h-screen w-screen">
           <Contact onNavigate={setCurrentSection} />
         </section>
 
