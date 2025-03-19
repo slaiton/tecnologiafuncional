@@ -119,6 +119,9 @@ export default function Header() {
             <a className="cursor-pointer text-white text-lg hover:text-red-400" onClick={() => scrollToSection("services")}>
               Servicios
             </a>
+            <a className="cursor-pointer text-white text-lg hover:text-red-400" onClick={() => scrollToSection("contact")}>
+              Contacto
+            </a>
           </motion.div>
       )}
     </div>
