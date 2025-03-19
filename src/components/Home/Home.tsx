@@ -24,9 +24,7 @@ const Home: React.FC<HomeProps> = ({ onNavigate }) => {
         muted
       />
 
-
       <div className="absolute top-0 left-0 w-full h-full bg-black opacity-60 flex flex-col">
-
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
