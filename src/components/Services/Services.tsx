@@ -28,7 +28,7 @@ const Services: React.FC<ServiceProps> = () => {
       transition={{ duration: 0.8, ease: "easeOut" }}
       className="w-full md:w-1/2 flex flex-col items-center justify-center px-4"
     >
-      <h2 className="text-2xl sm:text-3xl font-bold mb-4">¿Por qué elegirnos?</h2>
+      <h2 className="text-2xl sm:text-3xl font-bold mb-4 text-black">¿Por qué elegirnos?</h2>
       <p className="text-md sm:text-lg text-gray-600 max-w-md">
         Somos un equipo altamente calificado, con metodologías ágiles y estructuradas.
       </p>
