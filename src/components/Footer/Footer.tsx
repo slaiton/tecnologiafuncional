@@ -1,5 +1,5 @@
 // import React from "react";
-import { FaEnvelope, FaPhoneAlt, FaMapMarkerAlt } from "react-icons/fa";
+import { FaEnvelope } from "react-icons/fa";
 import "./Footer.css";
 
 const Footer = () => {
@@ -36,15 +36,8 @@ const Footer = () => {
 
       <div className="footer-contact">
         {/* <h3>Contacto</h3> */}
-        <p><FaEnvelope className="icon" /> <a href="mailto:ejemplo@dominio.com">cesar.pulido@tecnologiafuncional.com</a></p>
-    <p><FaPhoneAlt className="icon" /> <a href="tel:+1234567890">+57 3118101300</a></p>
-        <p>
-          <FaMapMarkerAlt className="icon" />
-          <a href="https://www.google.com/maps?ll=4.684742,-74.046699&z=16&t=m&hl=es-US&gl=US&mapclient=embed&q=Cra.+14+%23100-19+Bogot%C3%A1"
-            target="_blank" rel="noopener noreferrer">
-            Cra. 14 #100-19 Bogota, Colombia
-          </a>
-        </p>
+        <p><FaEnvelope className="icon" /> <a href="mailto:ejemplo@dominio.com">contacto@tecnologiafuncional.com</a></p>
+  
       </div>
 
 
