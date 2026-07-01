@@ -10,11 +10,27 @@ interface ContactProps {
 }
 
 const Contact: React.FC<ContactProps> = ({ }) => {
+  
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [message, setMessage] = useState("");
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    await fetch("http://localhost:5000/api/send-email", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ name, email, message }),
+    });
+    alert("¡Correo enviado!");
+    setName(""); setEmail(""); setMessage("");
+  };
+
   const [focus, setFocus] = useState({
     name: false,
     email: false,
     message: false,
-  });
+  }); 
 
   const handleFocus = (field: string) => {
     setFocus((prev) => ({ ...prev, [field]: true }));
@@ -40,7 +56,7 @@ const Contact: React.FC<ContactProps> = ({ }) => {
           >
             <h2 className="text-2xl font-semibold text-center mb-4">Contáctanos</h2>
 
-            <form className="flex flex-col gap-6">
+            <form onSubmit={handleSubmit} className="flex flex-col gap-6">
               {/* Nombre */}
               <div className="relative">
                 <label
@@ -50,6 +66,8 @@ const Contact: React.FC<ContactProps> = ({ }) => {
                   Nombre
                 </label>
                 <input
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
                   type="text"
                   className="w-full bg-gray-700 opacity-80 text-white p-3 rounded-md outline-none focus:ring-2 focus:ring-blue-400"
                   placeholder="Nombre"
@@ -61,12 +79,14 @@ const Contact: React.FC<ContactProps> = ({ }) => {
               {/* Email */}
               <div className="relative">
                 <label
-                  className={`absolute left-3 text-gray-400 text-sm transition-all ${focus.email ? "-top-4 text-xs text-blue-400" : "top-3 opacity-0"
+                  className={`absolute left-3 text-gray-400 text-sm transition  -all ${focus.email ? "-top-4 text-xs text-blue-400" : "top-3 opacity-0"
                     }`}
                 >
                   Correo
                 </label>
                 <input
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
                   type="email"
                   className="w-full bg-gray-700 bg-opacity-60 text-white p-3 rounded-md outline-none focus:ring-2 focus:ring-blue-400"
                   placeholder="Correo"
@@ -84,6 +104,8 @@ const Contact: React.FC<ContactProps> = ({ }) => {
                   Mensaje
                 </label>
                 <textarea
+                  value={message}
+                  onChange={(e) => setMessage(e.target.value)}
                   className="w-full bg-gray-700 bg-opacity-60 text-white p-3 rounded-md outline-none focus:ring-2 focus:ring-blue-400 resize-none"
                   placeholder="Mensaje"
                   rows={4}

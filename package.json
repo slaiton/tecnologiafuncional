@@ -12,7 +12,13 @@
   "dependencies": {
     "@tailwindcss/vite": "^4.0.7",
     "axios": "^1.8.1",
+    "cors": "^2.8.6",
+    "dotenv": "^17.4.2",
+    "express": "^5.2.1",
     "framer-motion": "^12.4.7",
+    "nodemailer": "^9.0.3",
+    "package-lock.json": "^1.0.0",
+    "package.json": "^2.0.1",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "react-hook-form": "^7.54.2",
