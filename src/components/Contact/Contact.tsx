@@ -114,7 +114,7 @@ const Contact: React.FC<ContactProps> = ({ }) => {
                 ></textarea>
               </div>
 
-              <button className="w-full text-black bg-blue-500 hover:bg-blue-600 transition-colors p-3 rounded-md font-semibold">
+              <button className="w-full text-white bg-blue-500 hover:bg-blue-600 transition-colors p-3 rounded-md font-semibold">
                 Enviar
               </button>
             </form>

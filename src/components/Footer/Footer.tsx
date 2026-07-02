@@ -1,7 +1,6 @@
 // import React from "react";
 import { FaEnvelope } from "react-icons/fa";
-import { TiSocialFacebook } from "react-icons/ti";
-import { TiSocialInstagram } from "react-icons/ti";
+import { TiSocialFacebook, TiSocialInstagram} from "react-icons/ti";
 import "./Footer.css";
 
 const Footer = () => {
@@ -17,22 +16,21 @@ const Footer = () => {
           <li><a href="/services">Servicios</a></li>
           <li><a href="/contact">Contacto</a></li>
         </ul>
-      </div> */}
-
+      </div> 
 
       <div className="footer-map">
-      </div>
+      </div>*/}
 
-      {/*<div className="date">
-        <p>© 2026 Tecnología Funcional. Todos los derechos reservados.</p>
+      <div className="footer-rights">
+        <p>© 2026 Tecnología Funcional</p>
+        <p>Todos los derechos reservados.</p>
       </div>
-      */}
       
       <div className="footer-contact">
         {/* <h3>Contacto</h3> */}
         <p><FaEnvelope className="icon" /> <a href="mailto:ejemplo@dominio.com">contacto@tecnologiafuncional.com</a></p>
-        <p><TiSocialFacebook className="icon" /> <a href="" target="_blank" rel="noopener noreferrer">Síguenos en Facebook</a></p>
-        <p><TiSocialInstagram className="icon" /> <a href="" target="_blank" rel="noopener noreferrer">Síguenos en Instagram</a></p>
+        <p><TiSocialFacebook className="icon" /> <a href="" target="_blank" rel="noopener noreferrer">Facebook</a></p>
+        <p><TiSocialInstagram className="icon" /> <a href="" target="_blank" rel="noopener noreferrer">Instagram</a></p>
       </div>
 
     </footer>

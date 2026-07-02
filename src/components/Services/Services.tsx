@@ -52,7 +52,7 @@ const Services: React.FC<ServiceProps> = () => {
           className="flex flex-col items-center justify-center p-6 border rounded-lg shadow-lg bg-white hover:shadow-xl transition-shadow"
         >
           {service.icon}
-          <h3 className="text-lg font-semibold mt-4">{service.title}</h3>
+          <h3 className="text-lg font-semibold mt-4 text-gray-800">{service.title}</h3>
           <p className="text-sm text-gray-500 mt-2 text-center max-w-xs">
             {service.description}
           </p>
