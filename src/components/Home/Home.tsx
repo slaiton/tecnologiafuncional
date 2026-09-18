@@ -1,77 +1,132 @@
 import { motion } from "framer-motion";
 import React from "react";
-// import { useNavigate } from "react-router-dom";
-import './Home.css'
+import "./Home.css";
 
 interface HomeProps {
   onNavigate: (section: string) => void;
 }
 
-
 const Home: React.FC<HomeProps> = ({ onNavigate }) => {
-
-
   return (
-    <div className="relative w-full h-full">
+    <div className="home">
+      {/* VIDEO DE FONDO */}
       <motion.video
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        transition={{ duration: 1.5 }}
-        className="min-h-screen bg-cover bg-center object-cover"
-        src="../video.mp4"
+        transition={{ duration: 1.4 }}
+        className="home-video"
+        src="/video2.mp4"
         autoPlay
         loop
         muted
+        playsInline
       />
 
-      <div className="absolute top-0 left-0 w-full h-full bg-black opacity-60 flex flex-col">
+      {/* OSCURECIMIENTO + COLOR */}
+      <div className="home-overlay"></div>
+
+      {/* LUCES DECORATIVAS */}
+      <div className="home-glow home-glow-one"></div>
+      <div className="home-glow home-glow-two"></div>
+
+      {/* CONTENIDO */}
+      <main className="home-content">
         <motion.div
+          initial={{ opacity: 0, y: 25 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.3 }}
+          className="home-badge"
+        >
+          <span className="home-badge-dot"></span>
+          Soluciones digitales a medida
+        </motion.div>
+
+        <motion.h1
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1, delay: 1 }}
-          className="flex flex-1 items-center justify-center p-10"
+          transition={{ duration: 0.9, delay: 0.5 }}
+          className="home-title"
         >
-          <div className="text-center text-white">
-            <h1 className="text-4xl font-bold opacity-100">Tecnología Funcional</h1>
-            <p className="text-lg mt-4 opacity-100">
-              Somos una empresa a la vanguardia en soluciones de desarrollo de software a medida.
-            </p>
-          </div>
-        </motion.div>
-      </div>
-
-
-      {/* <div className="absolute top-0 left-0 w-full h-full bg-black bg-opacity-60 flex justify-center items-center">
-        <motion.h1
-          initial={{ opacity: 0, y: 50 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1, ease: "easeOut" }}
-          className="text-white text-3xl md:text-5xl font-bold text-center px-4"
-        >
-          Bienvenido a Nuestra Plataforma
+          Tecnología <span>Funcional</span>
         </motion.h1>
-      </div> */}
 
-
-
-      <div
-        className="absolute bottom-8 left-1/2 transform -translate-x-1/2 cursor-pointer animate-bounce"
-        onClick={() => onNavigate("#services")}
-      >
-        <svg
-          className="w-10 h-10 text-white"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="2"
-          viewBox="0 0 24 24"
-          xmlns="http://www.w3.org/2000/svg"
+        <motion.p
+          initial={{ opacity: 0, y: 25 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.7 }}
+          className="home-description"
         >
-          <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7"></path>
-        </svg>
-      </div>
+          Transformamos desafíos complejos en soluciones tecnológicas
+          eficientes, modernas y diseñadas para impulsar tu negocio.
+        </motion.p>
 
+        {/* BOTONES */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.7, delay: 0.9 }}
+          className="home-actions"
+        >
+          <button
+            onClick={() => onNavigate("contact")}
+            className="home-btn home-btn-primary"
+          >
+            Solicitar asesoría
+            <span>→</span>
+          </button>
+
+          <button
+            onClick={() => onNavigate("services")}
+            className="home-btn home-btn-secondary"
+          >
+            Ver servicios
+          </button>
+        </motion.div>
+
+        {/* TECNOLOGÍAS / CONCEPTOS */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 1, delay: 1.2 }}
+          className="home-features"
+        >
+          <span>Desarrollo</span>
+          <i></i>
+          <span>Innovación</span>
+          <i></i>
+          <span>Optimización</span>
+        </motion.div>
+      </main>
+
+      {/* INDICADOR DE SCROLL */}
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 1.5 }}
+        className="home-scroll"
+        onClick={() => onNavigate("services")}
+      >
+        <span>Explorar</span>
+
+        <div className="home-scroll-icon">
+          <svg
+            width="20"
+            height="20"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="1.8"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              d="M19 9l-7 7-7-7"
+            />
+          </svg>
+        </div>
+      </motion.div>
     </div>
-  )
-}
+  );
+};
 
-export default Home
+export default Home;

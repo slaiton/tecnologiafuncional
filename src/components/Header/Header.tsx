@@ -1,130 +1,122 @@
 import { useEffect, useState } from "react";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { FaBars, FaTimes } from "react-icons/fa";
-// import { useNavigate } from "react-router-dom";
+import "./Header.css";
 
 export default function Header() {
-    const [isOpen, setIsOpen] = useState(false);
-    const [showHeader, setShowHeader] = useState(false);
-    const [activeSection, setActiveSection] = useState<string>("home");
+  const [isOpen, setIsOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+  const [activeSection, setActiveSection] = useState("home");
 
-    useEffect(() => {
-        const handleScroll = () => {
-          if (window.scrollY > 100) {
-            setShowHeader(true);
-          } else {
-            setShowHeader(false);
-          }
-    
-          // Detecta la sección visible en pantalla
-          const sections = document.querySelectorAll("section");
-          sections.forEach((section) => {
-            const rect = section.getBoundingClientRect();
-            if (rect.top <= 150 && rect.bottom >= 150) {
-              setActiveSection(section.id);
-            }
-          });
-        };
-    
-        window.addEventListener("scroll", handleScroll);
-        return () => window.removeEventListener("scroll", handleScroll);
-      }, []);
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 30);
+
+      const sections = document.querySelectorAll("section");
+
+      sections.forEach((section) => {
+        const rect = section.getBoundingClientRect();
+
+        if (rect.top <= 180 && rect.bottom >= 180) {
+          setActiveSection(section.id);
+        }
+      });
+    };
+
+    handleScroll();
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
 
   const scrollToSection = (id: string) => {
     const section = document.getElementById(id);
+
     if (section) {
-      window.scrollTo({
-        top: section.offsetTop,
+      section.scrollIntoView({
         behavior: "smooth",
+        block: "start",
       });
-      setIsOpen(false); // Cierra el menú en móvil
     }
+
+    setIsOpen(false);
   };
 
-//   const navigate = useNavigate();
+  const menuItems = [
+    { id: "home", label: "Inicio" },
+    { id: "about", label: "Nosotros" },
+    { id: "services", label: "Soluciones" },
+    { id: "contact", label: "Contacto" },
+  ];
 
   return (
-    <header
-    className={`fixed top-0 left-0 w-full z-50 transition-all duration-500 ${
-      showHeader ? "bg-gray-900 bg-opacity-60 shadow-md" : "bg-transparent"
-    }`}
-  >
-    <div className="container mx-auto px-6 py-4 flex items-center">
-      
-      {/* Logo (Siempre Visible) */}
+    <header className={`site-header ${scrolled ? "scrolled" : ""}`}>
+      {/* LOGO FIJO */}
       <motion.div
-        initial={{ opacity: 0, y: -50 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 1, delay: 0.5 }}
-        className="mr-6 cursor-pointer"
+        className="header-logo"
+        initial={{ opacity: 0, scale: 0.8, y: -20 }}
+        animate={{ opacity: 1, scale: 1, y: 0 }}
+        transition={{
+          duration: 0.7,
+          ease: "easeOut",
+        }}
         onClick={() => scrollToSection("home")}
       >
-        <img src="/tf.png" alt="Logo" width="60px" height="60px" className="opacity-100" />
+        <img src="/tf.png" alt="Tecnología Funcional" />
       </motion.div>
 
-      {/* Menú visible cuando showHeader es true */}
-      {showHeader && (
-         <motion.nav
-         initial={{ opacity: 0, y: -20 }}
-         animate={{ opacity: 1, y: 0 }}
-         transition={{ duration: 0.5 }}
-         className="hidden md:flex ml-auto gap-10 text-lg text-white"
-       >
-         <a
-           className={`cursor-pointer relative transition-opacity hover:opacity-80 ${
-             activeSection === "home" ? "after:content-[''] after:absolute after:left-0 after:bottom-[-2px] after:w-full after:h-[2px] after:bg-red-400" : ""
-           }`}
-           onClick={() => scrollToSection("home")}
-         >
-           Inicio
-         </a>
-         <a
-           className={`cursor-pointer relative transition-opacity hover:opacity-80 ${
-             activeSection === "services" ? "after:content-[''] after:absolute after:left-0 after:bottom-[-2px] after:w-full after:h-[2px] after:bg-red-400" : ""
-           }`}
-           onClick={() => scrollToSection("services")}
-         >
-           Servicios
-         </a>
-
-         <a
-           className={`cursor-pointer relative transition-opacity hover:opacity-80 ${
-             activeSection === "contact" ? "after:content-[''] after:absolute after:left-0 after:bottom-[-2px] after:w-full after:h-[2px] after:bg-red-400" : ""
-           }`}
-           onClick={() => scrollToSection("contact")}
-         >
-           Contacto
-         </a>
-       </motion.nav>
-      )}
-
-      {/* Botón Menú Móvil */}
-      {showHeader && (
-        <button onClick={() => setIsOpen(!isOpen)} className="md:hidden ml-auto">
-          {isOpen ? <FaTimes size={24} /> : <FaBars size={24} />}
-        </button>
-      )}
-
-      {/* Menú Móvil Desplegable */}
-      {isOpen && showHeader && (
-          <motion.div
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.3 }}
-            className="absolute top-16 left-0 w-full bg-gray-900 bg-opacity-60 p-6 flex flex-col gap-4 items-center md:hidden"
+      {/* NAVEGACIÓN DESKTOP */}
+      <nav className="desktop-nav">
+        {menuItems.map((item) => (
+          <button
+            key={item.id}
+            type="button"
+            className={`nav-link ${activeSection === item.id ? "active" : ""}`}
+            onClick={() => scrollToSection(item.id)}
           >
-            <a className="cursor-pointer text-white text-lg hover:text-red-400" onClick={() => scrollToSection("home")}>
-              Inicio
-            </a>
-            <a className="cursor-pointer text-white text-lg hover:text-red-400" onClick={() => scrollToSection("services")}>
-              Servicios
-            </a>
-            <a className="cursor-pointer text-white text-lg hover:text-red-400" onClick={() => scrollToSection("contact")}>
-              Contacto
-            </a>
-          </motion.div>
-      )}
-    </div>
-  </header>
+            {item.label}
+          </button>
+        ))}
+      </nav>
+
+      {/* BOTÓN MOBILE */}
+      <button
+        type="button"
+        className="mobile-menu-button"
+        onClick={() => setIsOpen(!isOpen)}
+        aria-label={isOpen ? "Cerrar menú" : "Abrir menú"}
+      >
+        {isOpen ? <FaTimes /> : <FaBars />}
+      </button>
+
+      {/* MENÚ MOBILE */}
+      <AnimatePresence>
+        {isOpen && (
+          <motion.nav
+            className="mobile-nav"
+            initial={{ opacity: 0, y: -15 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -15 }}
+            transition={{ duration: 0.25 }}
+          >
+            {menuItems.map((item) => (
+              <button
+                key={item.id}
+                type="button"
+                className={`mobile-nav-link ${
+                  activeSection === item.id ? "active" : ""
+                }`}
+                onClick={() => scrollToSection(item.id)}
+              >
+                {item.label}
+              </button>
+            ))}
+          </motion.nav>
+        )}
+      </AnimatePresence>
+    </header>
   );
 }

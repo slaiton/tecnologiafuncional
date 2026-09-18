@@ -1,0 +1,285 @@
+.contact-section {
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+  padding: 120px 6%;
+  overflow: hidden;
+
+  background:
+    radial-gradient(circle at 20% 25%, rgba(37, 99, 235, 0.1), transparent 30%),
+    radial-gradient(
+      circle at 85% 70%,
+      rgba(6, 182, 212, 0.08),
+      transparent 30%
+    ),
+    #050a12;
+
+  display: flex;
+  align-items: center;
+}
+
+/* ==========================
+   GLOWS
+========================== */
+
+.contact-glow {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(90px);
+  pointer-events: none;
+}
+
+.contact-glow-one {
+  width: 320px;
+  height: 320px;
+  top: 0;
+  left: -120px;
+  background: rgba(37, 99, 235, 0.18);
+}
+
+.contact-glow-two {
+  width: 280px;
+  height: 280px;
+  right: -100px;
+  bottom: -100px;
+  background: rgba(6, 182, 212, 0.12);
+}
+
+/* ==========================
+   CONTAINER
+========================== */
+
+.contact-container {
+  position: relative;
+  z-index: 2;
+
+  width: 100%;
+  max-width: 1250px;
+
+  margin: 0 auto;
+
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+
+  align-items: center;
+}
+
+/* ==========================
+   INFO
+========================== */
+
+.contact-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+
+  padding: 8px 14px;
+
+  border-radius: 999px;
+
+  border: 1px solid rgba(56, 189, 248, 0.15);
+
+  background: rgba(56, 189, 248, 0.05);
+
+  color: #38bdf8;
+
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 2px;
+}
+
+.contact-tag-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #38bdf8;
+}
+
+.contact-info h2 {
+  margin-top: 25px;
+
+  color: white;
+
+  font-size: clamp(38px, 5vw, 56px);
+
+  line-height: 1.1;
+
+  letter-spacing: -2px;
+}
+
+.contact-info h2 span {
+  background: linear-gradient(90deg, #38bdf8, #2563eb);
+
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.contact-info p {
+  margin-top: 25px;
+
+  max-width: 550px;
+
+  color: rgba(203, 213, 225, 0.7);
+
+  font-size: 16px;
+  line-height: 1.8;
+}
+
+.contact-solutions {
+  margin-top: 40px;
+
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+
+  color: rgba(255, 255, 255, 0.85);
+
+  font-size: 16px;
+}
+
+/* ==========================
+   CARD
+========================== */
+
+.contact-form-card {
+  padding: 40px;
+
+  border-radius: 24px;
+
+  border: 1px solid rgba(255, 255, 255, 0.08);
+
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.055),
+    rgba(255, 255, 255, 0.015)
+  );
+
+  backdrop-filter: blur(18px);
+
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.25);
+}
+
+.contact-form-card h3 {
+  color: white;
+
+  font-size: 30px;
+
+  margin: 0;
+}
+
+.contact-form-card p {
+  color: rgba(203, 213, 225, 0.65);
+
+  margin-top: 12px;
+  margin-bottom: 30px;
+}
+
+/* ==========================
+   FORM
+========================== */
+
+.contact-form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.contact-form input,
+.contact-form select,
+.contact-form textarea {
+  width: 100%;
+
+  padding: 16px;
+
+  border-radius: 14px;
+
+  border: 1px solid rgba(255, 255, 255, 0.08);
+
+  background: rgba(255, 255, 255, 0.04);
+
+  color: white;
+
+  outline: none;
+
+  transition: all 0.3s ease;
+}
+
+.contact-form select option {
+  background: #0f172a;
+  color: white;
+}
+
+.contact-form input::placeholder,
+.contact-form textarea::placeholder {
+  color: rgba(203, 213, 225, 0.45);
+}
+
+.contact-form input:focus,
+.contact-form select:focus,
+.contact-form textarea:focus {
+  border-color: rgba(56, 189, 248, 0.35);
+
+  box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.08);
+}
+
+.contact-form textarea {
+  resize: vertical;
+  min-height: 140px;
+}
+
+.contact-form button {
+  margin-top: 8px;
+
+  border: none;
+
+  padding: 16px;
+
+  border-radius: 14px;
+
+  background: linear-gradient(135deg, #2563eb, #0284c7);
+
+  color: white;
+
+  font-size: 15px;
+  font-weight: 600;
+
+  cursor: pointer;
+
+  transition: all 0.3s ease;
+}
+
+.contact-form button:hover {
+  transform: translateY(-2px);
+
+  box-shadow: 0 12px 30px rgba(37, 99, 235, 0.35);
+}
+
+/* ==========================
+   RESPONSIVE
+========================== */
+
+@media (max-width: 900px) {
+  .contact-container {
+    grid-template-columns: 1fr;
+    gap: 50px;
+  }
+
+  .contact-form-card {
+    padding: 30px;
+  }
+}
+
+@media (max-width: 600px) {
+  .contact-section {
+    padding: 100px 20px 80px;
+  }
+
+  .contact-info h2 {
+    font-size: 36px;
+  }
+
+  .contact-form-card {
+    padding: 25px;
+  }
+}
