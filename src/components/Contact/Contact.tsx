@@ -1,128 +1,150 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
-// import axios from "axios";
-
-import './Contact.css'
-// import { div } from "framer-motion/client";
+import "./Contact.css";
 
 interface ContactProps {
   onNavigate: (section: string) => void;
 }
 
-const Contact: React.FC<ContactProps> = ({ }) => {
-  
+const Contact: React.FC<ContactProps> = () => {
   const [name, setName] = useState("");
+  const [company, setCompany] = useState("");
   const [email, setEmail] = useState("");
+  const [phone, setPhone] = useState("");
+  const [projectType, setProjectType] = useState("");
   const [message, setMessage] = useState("");
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+
     await fetch("http://localhost:5000/api/send-email", {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ name, email, message }),
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        name,
+        company,
+        email,
+        phone,
+        projectType,
+        message,
+      }),
     });
-    alert("¡Correo enviado!");
-    setName(""); setEmail(""); setMessage("");
-  };
 
-  const [focus, setFocus] = useState({
-    name: false,
-    email: false,
-    message: false,
-  }); 
+    alert("¡Correo enviado correctamente!");
 
-  const handleFocus = (field: string) => {
-    setFocus((prev) => ({ ...prev, [field]: true }));
-  };
-
-  const handleBlur = (field: string, value: string) => {
-    if (!value) {
-      setFocus((prev) => ({ ...prev, [field]: false }));
-    }
+    setName("");
+    setCompany("");
+    setEmail("");
+    setPhone("");
+    setProjectType("");
+    setMessage("");
   };
 
   return (
-    <div className="min-h-screen  bg-cover bg-center" style={{ backgroundImage: "url('/video2.gif')" }}>
-    
-    <div className="w-full h-screen flex justify-center items-center bg-black-80">
+    <section id="contact" className="contact-section">
+      <div className="contact-glow contact-glow-one"></div>
+      <div className="contact-glow contact-glow-two"></div>
 
-        <div className="w-80 left-10 max-w-lg flex items-center justify-center bg-gray-900 p-8 rounded-lg shadow-lg">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-            className="w-96 text-white"
-          >
-            <h2 className="text-2xl font-semibold text-center mb-4">Contáctanos</h2>
+      <div className="contact-container">
+        <motion.div
+          initial={{ opacity: 0, x: -60 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8 }}
+          className="contact-info"
+        >
+          <span className="contact-tag">
+            <span className="contact-tag-dot"></span>
+            CONTACTO
+          </span>
 
-            <form onSubmit={handleSubmit} className="flex flex-col gap-6">
-              {/* Nombre */}
-              <div className="relative">
-                <label
-                  className={`absolute left-3 text-gray-400 text-sm transition-all ${focus.name ? "-top-4 text-xs text-blue-400" : "top-3 opacity-0"
-                    }`}
-                >
-                  Nombre
-                </label>
-                <input
-                  value={name}
-                  onChange={(e) => setName(e.target.value)}
-                  type="text"
-                  className="w-full bg-gray-700 opacity-80 text-white p-3 rounded-md outline-none focus:ring-2 focus:ring-blue-400"
-                  placeholder="Nombre"
-                  onFocus={() => handleFocus("name")}
-                  onBlur={(e) => handleBlur("name", e.target.value)}
-                />
-              </div>
+          <h2>
+            Conversemos sobre tu
+            <span> próximo proyecto</span>
+          </h2>
 
-              {/* Email */}
-              <div className="relative">
-                <label
-                  className={`absolute left-3 text-gray-400 text-sm transition  -all ${focus.email ? "-top-4 text-xs text-blue-400" : "top-3 opacity-0"
-                    }`}
-                >
-                  Correo
-                </label>
-                <input
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  type="email"
-                  className="w-full bg-gray-700 bg-opacity-60 text-white p-3 rounded-md outline-none focus:ring-2 focus:ring-blue-400"
-                  placeholder="Correo"
-                  onFocus={() => handleFocus("email")}
-                  onBlur={(e) => handleBlur("email", e.target.value)}
-                />
-              </div>
+          <p>
+            Creamos soluciones tecnológicas que impulsan la transformación
+            digital de las organizaciones.
+          </p>
 
-              {/* Mensaje */}
-              <div className="relative">
-                <label
-                  className={`absolute left-3 text-gray-400 text-sm transition-all ${focus.message ? "-top-4 text-xs text-blue-400" : "top-3 opacity-0"
-                    }`}
-                >
-                  Mensaje
-                </label>
-                <textarea
-                  value={message}
-                  onChange={(e) => setMessage(e.target.value)}
-                  className="w-full bg-gray-700 bg-opacity-60 text-white p-3 rounded-md outline-none focus:ring-2 focus:ring-blue-400 resize-none"
-                  placeholder="Mensaje"
-                  rows={4}
-                  onFocus={() => handleFocus("message")}
-                  onBlur={(e) => handleBlur("message", e.target.value)}
-                ></textarea>
-              </div>
+          <div className="contact-solutions">
+            <div>✓ Riesgo Logístico</div>
+            <div>✓ TFirma</div>
+            <div>✓ Conducir</div>
+          </div>
+        </motion.div>
 
-              <button className="w-full text-white bg-blue-500 hover:bg-blue-600 transition-colors p-3 rounded-md font-semibold">
-                Enviar
-              </button>
-            </form>
-          </motion.div>
-        </div>
+        <motion.div
+          initial={{ opacity: 0, x: 60 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8 }}
+          className="contact-form-card"
+        >
+          <h3>Solicita una asesoría</h3>
+
+          <p>Nuestro equipo se pondrá en contacto contigo.</p>
+
+          <form onSubmit={handleSubmit} className="contact-form">
+            <input
+              type="text"
+              placeholder="Nombre completo"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+            />
+
+            <input
+              type="text"
+              placeholder="Empresa"
+              value={company}
+              onChange={(e) => setCompany(e.target.value)}
+            />
+
+            <input
+              type="email"
+              placeholder="Correo electrónico"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+            />
+
+            <input
+              type="text"
+              placeholder="Teléfono"
+              value={phone}
+              onChange={(e) => setPhone(e.target.value)}
+            />
+
+            <select
+              value={projectType}
+              onChange={(e) => setProjectType(e.target.value)}
+            >
+              <option value="">Tipo de proyecto</option>
+
+              <option value="riesgo-logistico">Riesgo Logístico</option>
+
+              <option value="tfirma">TFirma</option>
+
+              <option value="conducir">Conducir</option>
+
+              <option value="otro">Otro</option>
+            </select>
+
+            <textarea
+              rows={5}
+              placeholder="Cuéntanos sobre tu necesidad..."
+              value={message}
+              onChange={(e) => setMessage(e.target.value)}
+            />
+
+            <button type="submit">Solicitar Asesoría</button>
+          </form>
+        </motion.div>
       </div>
-    </div>
+    </section>
   );
-}
+};
 
 export default Contact;

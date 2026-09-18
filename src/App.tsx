@@ -1,20 +1,19 @@
-
-import Home from './components/Home/Home';
-import Header from './components/Header/Header';
+import Home from "./components/Home/Home";
+import Header from "./components/Header/Header";
 import { useState, useEffect } from "react";
-import './App.css'
-// import About from './components/About/About';
-import Services from './components/Services/Services';
+import "./App.css";
+import About from "./components/About/About";
+import Services from "./components/Services/Services";
 
-import Contact from './components/Contact/Contact';
-import Footer from './components/Footer/Footer';
+import Contact from "./components/Contact/Contact";
+import Footer from "./components/Footer/Footer";
 
 const App: React.FC = () => {
   const [currentSection, setCurrentSection] = useState<string>("#home");
   const [position, setPosition] = useState({ x: 0, y: 0 });
-  
+
   useEffect(() => {
-    const handleMouseMove = (event:any) => {
+    const handleMouseMove = (event: any) => {
       console.log(event);
       setPosition({ x: event.clientX, y: event.clientY });
     };
@@ -30,7 +29,7 @@ const App: React.FC = () => {
     const handleScroll = () => {
       const sections = ["#home", "#about", "#services"];
       const scrollPosition = window.scrollY + window.innerHeight / 2;
-      currentSection
+      currentSection;
       for (const section of sections) {
         const element = document.getElementById(section.substring(1));
         if (element) {
@@ -48,10 +47,8 @@ const App: React.FC = () => {
   }, []);
 
   return (
-
     <div className="app">
-
-     <Header/>
+      <Header />
 
       <div className="mouse-follower">
         <div
@@ -62,27 +59,31 @@ const App: React.FC = () => {
         ></div>
       </div>
 
-
       <div className="sections">
         <section id="home" className="min-h-screen w-screen">
           <Home onNavigate={setCurrentSection} />
         </section>
 
-        <section id="services" className="min-h-screen w-screen bg-cover bg-center flex flex-col justify-center" style={{ backgroundImage: "url('/fondo3.jpeg')" }}>
-          <Services onNavigate={setCurrentSection} />
+        <section id="about" className="min-h-screen w-screen">
+          <About onNavigate={setCurrentSection} />
         </section>
 
+        <section
+          id="services"
+          className="min-h-screen w-screen bg-cover bg-center flex flex-col justify-center"
+          style={{ backgroundImage: "url('/fondo3.jpeg')" }}
+        >
+          <Services onNavigate={setCurrentSection} />
+        </section>
 
         <section id="contact" className="min-h-screen w-screen">
           <Contact onNavigate={setCurrentSection} />
         </section>
-
       </div>
 
-     <Footer />
-
-    </div >
+      <Footer />
+    </div>
   );
 };
 
-export default App
+export default App;

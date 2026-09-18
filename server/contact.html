@@ -1,145 +1,130 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="es">
-
-<head>
-    <meta charset="UTF-8">
+  <head>
+    <meta charset="UTF-8" />
 
     <style>
-        body{
-            margin:0;
-            padding:0;
-            background:#f3f6fb;
-            font-family:Arial,Helvetica,sans-serif;
-        }
+      body {
+        margin: 0;
+        padding: 0;
+        background: #f3f6fb;
+        font-family: Arial, Helvetica, sans-serif;
+      }
 
-        .container{
-            max-width:700px;
-            margin:40px auto;
-            background:#ffffff;
-            border-radius:12px;
-            overflow:hidden;
-            box-shadow:0 8px 30px rgba(0,0,0,.08);
-        }
+      .container {
+        max-width: 700px;
+        margin: 40px auto;
+        background: #ffffff;
+        border-radius: 12px;
+        overflow: hidden;
+        box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+      }
 
-        .header{
-            background:linear-gradient(135deg,#0f172a,#1e3a8a);
-            padding:35px;
-            text-align:center;
-        }
+      .header {
+        background: linear-gradient(135deg, #0f172a, #1e3a8a);
+        padding: 35px;
+        text-align: center;
+      }
 
-        .header h1{
-            color:white;
-            margin:0;
-        }
+      .header h1 {
+        color: white;
+        margin: 0;
+      }
 
-        .header p{
-            color:#dbeafe;
-        }
+      .header p {
+        color: #dbeafe;
+      }
 
-        .content{
-            padding:35px;
-        }
+      .content {
+        padding: 35px;
+      }
 
-        .card{
-            background:#f8fafc;
-            border-left:5px solid #2563eb;
-            padding:20px;
-            border-radius:8px;
-            margin-bottom:25px;
-        }
+      .card {
+        background: #f8fafc;
+        border-left: 5px solid #2563eb;
+        padding: 20px;
+        border-radius: 8px;
+        margin-bottom: 25px;
+      }
 
-        .label{
-            color:#64748b;
-            font-size:12px;
-            text-transform:uppercase;
-            font-weight:bold;
-            margin-bottom:6px;
-        }
+      .label {
+        color: #64748b;
+        font-size: 12px;
+        text-transform: uppercase;
+        font-weight: bold;
+        margin-bottom: 6px;
+      }
 
-        .value{
-            font-size:17px;
-            color:#0f172a;
-            margin-bottom:20px;
-        }
+      .value {
+        font-size: 17px;
+        color: #0f172a;
+        margin-bottom: 20px;
+      }
 
-        .message{
-            background:white;
-            border:1px solid #e2e8f0;
-            border-radius:8px;
-            padding:20px;
-            white-space:pre-line;
-            line-height:1.6;
-        }
+      .message {
+        background: white;
+        border: 1px solid #e2e8f0;
+        border-radius: 8px;
+        padding: 20px;
+        white-space: pre-line;
+        line-height: 1.6;
+      }
 
-        .footer{
-            background:#f8fafc;
-            padding:25px;
-            text-align:center;
-            color:#64748b;
-            font-size:13px;
-        }
+      .footer {
+        background: #f8fafc;
+        padding: 25px;
+        text-align: center;
+        color: #64748b;
+        font-size: 13px;
+      }
     </style>
+  </head>
 
-</head>
-
-<body>
-
-<div class="container">
-
-    <div class="header">
-
+  <body>
+    <div class="container">
+      <div class="header">
         <img
-        src="cid:logoTF"
-        alt="Tecnología Funcional"
-        style="
-            width:120px;
-            height:auto;
-            margin-bottom:15px;
-        "
-        >
+          src="cid:logoTF"
+          alt="Tecnología Funcional"
+          style="width: 120px; height: auto; margin-bottom: 15px"
+        />
 
         <h1>Tecnología Funcional</h1>
         <p>Nuevo mensaje desde el formulario web</p>
-    </div>
+      </div>
 
-    <div class="content">
-
+      <div class="content">
         <div class="card">
+          <div class="label">Nombre</div>
 
-            <div class="label">
-                Nombre
-            </div>
+          <div class="value">{{NAME}}</div>
 
-            <div class="value">
-                {{NAME}}
-            </div>
+          <div class="label">Empresa</div>
 
-            <div class="label">
-                Correo electrónico
-            </div>
+          <div class="value">{{COMPANY}}</div>
 
-            <div class="value">
-                {{EMAIL}}
-            </div>
+          <div class="label">Correo electrónico</div>
 
+          <div class="value">{{EMAIL}}</div>
+
+          <div class="label">Teléfono</div>
+
+          <div class="value">{{PHONE}}</div>
+
+          <div class="label">Tipo de proyecto</div>
+
+          <div class="value">{{PROJECT_TYPE}}</div>
         </div>
 
-        <div class="label">
-            Mensaje
-        </div>
+        <div class="label">Mensaje</div>
 
-        <div class="message">
-            {{MESSAGE}}
-        </div>
+        <div class="message">{{MESSAGE}}</div>
+      </div>
 
-    </div>
-
-    <div class="footer">
+      <div class="footer">
         Este correo fue generado automáticamente desde el sitio web de
         <strong>Tecnología Funcional</strong>.
+      </div>
     </div>
-
-</div>
-
-</body>
+  </body>
 </html>

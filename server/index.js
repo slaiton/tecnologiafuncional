@@ -1,47 +1,61 @@
-import express from 'express';
-import nodemailer from 'nodemailer';
-import cors from 'cors';
-import dotenv from 'dotenv';
-import fs from 'fs';
+import express from "express";
+import nodemailer from "nodemailer";
+import cors from "cors";
+import dotenv from "dotenv";
+import fs from "fs";
 
-import path from 'path';
-import { fileURLToPath } from 'url';
+import path from "path";
+import { fileURLToPath } from "url";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
-dotenv.config({ path: path.join(__dirname, '.env') });
+dotenv.config({ path: path.join(__dirname, ".env") });
 
 const app = express();
 const PORT = process.env.PORT || 5000;
 
-const templatePath = path.join(__dirname, 'contact.html');
+const templatePath = path.join(__dirname, "contact.html");
 
 app.use(cors());
 app.use(express.json());
 
 const transporter = nodemailer.createTransport({
-  service: 'gmail',
+  service: "gmail",
   auth: {
     user: process.env.GMAIL_USER,
     pass: process.env.GMAIL_PASS,
   },
 });
 
-app.post('/api/send-email', async (req, res) => {
-  const { name, email, message } = req.body;
+app.post("/api/send-email", async (req, res) => {
+  const { name, company, email, phone, projectType, message } = req.body;
 
-  if (!name || !email || !message) {
+  if (!name || !company || !email || !phone || !projectType || !message) {
     return res.status(400).json({
-      error: 'Todos los campos son obligatorios.',
+      error: "Todos los campos son obligatorios.",
     });
   }
 
   try {
-    let htmlTemplate = fs.readFileSync(templatePath, 'utf8');
+    const projectTypeLabels = {
+      "riesgo-logistico": "Riesgo Logístico",
+      tfirma: "TFirma",
+      conducir: "Conducir",
+      software: "Desarrollo a Medida",
+      otro: "Otro",
+    };
+
+    let htmlTemplate = fs.readFileSync(templatePath, "utf8");
 
     htmlTemplate = htmlTemplate
-      .replaceAll('{{NAME}}', name)
-      .replaceAll('{{EMAIL}}', email)
-      .replaceAll('{{MESSAGE}}', message);
+      .replaceAll("{{NAME}}", name)
+      .replaceAll("{{COMPANY}}", company)
+      .replaceAll("{{EMAIL}}", email)
+      .replaceAll("{{PHONE}}", phone)
+      .replaceAll(
+        "{{PROJECT_TYPE}}",
+        projectTypeLabels[projectType] || projectType,
+      )
+      .replaceAll("{{MESSAGE}}", message);
 
     const mailOptions = {
       from: `"Formulario Web" <${process.env.GMAIL_USER}>`,
@@ -50,25 +64,24 @@ app.post('/api/send-email', async (req, res) => {
       subject: `Nuevo mensaje de ${name}`,
       html: htmlTemplate,
       attachments: [
-      {
-        filename: 'tf.png',
-        path: path.join(__dirname, '../public/tf.png'),
-        cid: 'logoTF'
-      }
-    ]
+        {
+          filename: "tf.png",
+          path: path.join(__dirname, "../public/tf.png"),
+          cid: "logoTF",
+        },
+      ],
     };
 
     await transporter.sendMail(mailOptions);
 
     res.status(200).json({
-      message: 'Correo enviado con éxito.',
+      message: "Correo enviado con éxito.",
     });
-
   } catch (error) {
-    console.error('Error enviando el correo:', error);
+    console.error("Error enviando el correo:", error);
 
     res.status(500).json({
-      error: 'Error interno del servidor al enviar el correo.',
+      error: "Error interno del servidor al enviar el correo.",
     });
   }
 });
