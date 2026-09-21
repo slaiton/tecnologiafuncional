@@ -67,20 +67,20 @@ const Home: React.FC<HomeProps> = ({ onNavigate }) => {
           transition={{ duration: 0.7, delay: 0.9 }}
           className="home-actions"
         >
-          <button
-            onClick={() => onNavigate("contact")}
-            className="home-btn home-btn-primary"
-          >
-            Solicitar asesoría
-            <span>→</span>
-          </button>
+        <button
+          onClick={() => onNavigate("contact")}
+          className="home-btn home-btn-primary"
+        >
+          Solicitar asesoría
+          <span>→</span>
+        </button>
 
-          <button
-            onClick={() => onNavigate("services")}
-            className="home-btn home-btn-secondary"
-          >
-            Ver servicios
-          </button>
+        <button
+          onClick={() => onNavigate("services")}
+          className="home-btn home-btn-secondary"
+        >
+          Ver servicios
+        </button>
         </motion.div>
 
         {/* TECNOLOGÍAS / CONCEPTOS */}
