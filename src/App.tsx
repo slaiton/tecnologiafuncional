@@ -46,6 +46,19 @@ const App: React.FC = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  const handleNavigate = (sectionId: string) => {
+    const element = document.getElementById(sectionId);
+
+    if (element) {
+      element.scrollIntoView({
+        behavior: "smooth",
+        block: "start",
+      });
+    }
+
+    setCurrentSection(`#${sectionId}`);
+  };
+
   return (
     <div className="app">
       <Header />
@@ -61,7 +74,7 @@ const App: React.FC = () => {
 
       <div className="sections">
         <section id="home" className="min-h-screen w-screen">
-          <Home onNavigate={setCurrentSection} />
+          <Home onNavigate={handleNavigate} />
         </section>
 
         <section id="about" className="min-h-screen w-screen">
