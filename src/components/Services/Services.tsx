@@ -1,49 +1,14 @@
 import React from "react";
 import { motion } from "framer-motion";
-import {
-  FaShieldAlt,
-  FaFileSignature,
-  FaCar,
-  FaArrowRight,
-} from "react-icons/fa";
+import { Link } from "react-router-dom";
+import { FaArrowRight } from "react-icons/fa";
+import { featuredSolutions, solutions } from "../../data/solutions";
 
 import "./Services.css";
 
-const services = [
-  {
-    id: 1,
-    number: "01",
-    title: "Riesgo Logístico",
-    category: "GESTIÓN Y SEGURIDAD",
-    icon: <FaShieldAlt />,
-    description:
-      "Plataforma inteligente para la gestión y prevención del riesgo logístico. Automatiza procesos, centraliza información y facilita la toma de decisiones para una operación más segura y eficiente.",
-  },
-  {
-    id: 2,
-    number: "02",
-    title: "TFirma",
-    category: "GESTIÓN DOCUMENTAL",
-    icon: <FaFileSignature />,
-    description:
-      "Plataforma dinámica de firma electrónica que simplifica y automatiza la gestión documental. Permite firmar todo tipo de documentos legales de forma ágil, segura y electrónica.",
-  },
-  {
-    id: 3,
-    number: "03",
-    title: "Conducir",
-    category: "MOVILIDAD Y BENEFICIOS",
-    icon: <FaCar />,
-    description:
-      "Club de beneficios para propietarios de vehículos que convierte sus compras en beneficios inmediatos. Genera trazabilidad de las compras en tiempo real y permite obtener beneficios monetizables al instante.",
-  },
-];
+const customDevelopment = solutions.find((s) => s.id === "software");
 
-interface ServiceProps {
-  onNavigate?: (section: string) => void;
-}
-
-const Services: React.FC<ServiceProps> = () => {
+const Services: React.FC = () => {
   return (
     <section id="services" className="services-section">
       {/* Fondos decorativos */}
@@ -81,7 +46,7 @@ const Services: React.FC<ServiceProps> = () => {
             PRODUCTOS
         ================================= */}
         <div className="services-grid">
-          {services.map((service, index) => (
+          {featuredSolutions.map((service, index) => (
             <motion.article
               key={service.id}
               initial={{ opacity: 0, y: 60 }}
@@ -99,20 +64,26 @@ const Services: React.FC<ServiceProps> = () => {
               <div className="service-number">{service.number}</div>
 
               {/* Icono */}
-              <div className="service-icon">{service.icon}</div>
+              <div className="service-icon">
+                <service.icon />
+              </div>
 
               {/* Categoría */}
               <span className="service-category">{service.category}</span>
 
               {/* Título */}
-              <h3>{service.title}</h3>
+              <h3>
+                <Link to={service.path} className="service-card-link">
+                  {service.name}
+                </Link>
+              </h3>
 
               {/* Descripción */}
-              <p>{service.description}</p>
+              <p>{service.summary}</p>
 
               {/* Footer */}
               <div className="service-footer">
-                <span>Solución tecnológica</span>
+                <span>Conoce {service.name}</span>
 
                 <div className="service-arrow">
                   <FaArrowRight />
@@ -135,7 +106,12 @@ const Services: React.FC<ServiceProps> = () => {
           <span></span>
 
           <p>
-            Soluciones construidas para evolucionar junto a tu organización.
+            ¿Necesitas algo distinto?{" "}
+            {customDevelopment && (
+              <Link to={customDevelopment.path} className="services-bottom-link">
+                Desarrollamos software a la medida
+              </Link>
+            )}
           </p>
 
           <span></span>

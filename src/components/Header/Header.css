@@ -67,6 +67,12 @@
     filter 0.3s ease;
 }
 
+.header-logo a {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
 .header-logo img {
   width: 100%;
   height: 100%;
@@ -99,6 +105,8 @@
 
 .nav-link {
   position: relative;
+
+  text-decoration: none;
 
   padding: 8px 0;
 
@@ -232,7 +240,11 @@
 }
 
 .mobile-nav-link {
+  display: block;
+  box-sizing: border-box;
   width: 100%;
+
+  text-decoration: none;
 
   padding: 14px 16px;
 

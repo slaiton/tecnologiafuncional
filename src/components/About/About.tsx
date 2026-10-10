@@ -2,11 +2,7 @@ import React from "react";
 import { motion } from "framer-motion";
 import "./About.css";
 
-interface AboutProps {
-  onNavigate: (section: string) => void;
-}
-
-const About: React.FC<AboutProps> = () => {
+const About: React.FC = () => {
   return (
     <section id="about" className="about-section">
       {/* Brillos decorativos */}

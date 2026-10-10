@@ -1,45 +1,82 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
+import { solutions, type Solution } from "../../data/solutions";
 import "./Contact.css";
 
 interface ContactProps {
-  onNavigate: (section: string) => void;
+  /** Tipo de proyecto preseleccionado (páginas de cada solución) */
+  defaultProjectType?: Solution["id"];
 }
 
-const Contact: React.FC<ContactProps> = () => {
+const API_URL = import.meta.env.VITE_API_URL ?? "";
+
+type Status = { type: "success" | "error"; message: string } | null;
+
+const Contact: React.FC<ContactProps> = ({ defaultProjectType = "" }) => {
   const [name, setName] = useState("");
   const [company, setCompany] = useState("");
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
-  const [projectType, setProjectType] = useState("");
+  const [projectType, setProjectType] = useState<string>(defaultProjectType);
   const [message, setMessage] = useState("");
+  const [website, setWebsite] = useState("");
+  const [sending, setSending] = useState(false);
+  const [status, setStatus] = useState<Status>(null);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (sending) return;
 
-    await fetch("http://localhost:5000/api/send-email", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        name,
-        company,
-        email,
-        phone,
-        projectType,
-        message,
-      }),
-    });
+    setSending(true);
+    setStatus(null);
 
-    alert("¡Correo enviado correctamente!");
+    try {
+      const res = await fetch(`${API_URL}/api/send-email`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          name,
+          company,
+          email,
+          phone,
+          projectType,
+          message,
+          website,
+        }),
+      });
 
-    setName("");
-    setCompany("");
-    setEmail("");
-    setPhone("");
-    setProjectType("");
-    setMessage("");
+      const data = await res.json().catch(() => ({}));
+
+      if (!res.ok) {
+        throw new Error(
+          data.error || "No pudimos enviar tu mensaje. Inténtalo de nuevo.",
+        );
+      }
+
+      setStatus({
+        type: "success",
+        message: "¡Mensaje enviado! Nuestro equipo te contactará pronto.",
+      });
+
+      setName("");
+      setCompany("");
+      setEmail("");
+      setPhone("");
+      setProjectType(defaultProjectType);
+      setMessage("");
+    } catch (error) {
+      setStatus({
+        type: "error",
+        message:
+          error instanceof TypeError
+            ? "No hay conexión con el servidor. Inténtalo más tarde."
+            : (error as Error).message,
+      });
+    } finally {
+      setSending(false);
+    }
   };
 
   return (
@@ -92,6 +129,8 @@ const Contact: React.FC<ContactProps> = () => {
             <input
               type="text"
               placeholder="Nombre completo"
+              required
+              maxLength={100}
               value={name}
               onChange={(e) => setName(e.target.value)}
             />
@@ -99,6 +138,8 @@ const Contact: React.FC<ContactProps> = () => {
             <input
               type="text"
               placeholder="Empresa"
+              required
+              maxLength={100}
               value={company}
               onChange={(e) => setCompany(e.target.value)}
             />
@@ -106,28 +147,33 @@ const Contact: React.FC<ContactProps> = () => {
             <input
               type="email"
               placeholder="Correo electrónico"
+              required
+              maxLength={150}
               value={email}
               onChange={(e) => setEmail(e.target.value)}
             />
 
             <input
-              type="text"
+              type="tel"
               placeholder="Teléfono"
+              required
+              maxLength={30}
               value={phone}
               onChange={(e) => setPhone(e.target.value)}
             />
 
             <select
+              required
               value={projectType}
               onChange={(e) => setProjectType(e.target.value)}
             >
               <option value="">Tipo de proyecto</option>
 
-              <option value="riesgo-logistico">Riesgo Logístico</option>
-
-              <option value="tfirma">TFirma</option>
-
-              <option value="conducir">Conducir</option>
+              {solutions.map((solution) => (
+                <option key={solution.id} value={solution.id}>
+                  {solution.name}
+                </option>
+              ))}
 
               <option value="otro">Otro</option>
             </select>
@@ -135,11 +181,35 @@ const Contact: React.FC<ContactProps> = () => {
             <textarea
               rows={5}
               placeholder="Cuéntanos sobre tu necesidad..."
+              required
+              maxLength={3000}
               value={message}
               onChange={(e) => setMessage(e.target.value)}
             />
 
-            <button type="submit">Solicitar Asesoría</button>
+            <input
+              type="text"
+              name="website"
+              className="contact-honeypot"
+              tabIndex={-1}
+              autoComplete="off"
+              aria-hidden="true"
+              value={website}
+              onChange={(e) => setWebsite(e.target.value)}
+            />
+
+            {status && (
+              <p
+                className={`contact-status ${status.type}`}
+                role={status.type === "error" ? "alert" : "status"}
+              >
+                {status.message}
+              </p>
+            )}
+
+            <button type="submit" disabled={sending}>
+              {sending ? "Enviando..." : "Solicitar Asesoría"}
+            </button>
           </form>
         </motion.div>
       </div>

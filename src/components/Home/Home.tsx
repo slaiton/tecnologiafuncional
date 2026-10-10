@@ -1,25 +1,50 @@
 import { motion } from "framer-motion";
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import "./Home.css";
 
 interface HomeProps {
   onNavigate: (section: string) => void;
 }
 
+// El video solo se carga en pantallas grandes y si el usuario no pidió
+// reducir movimiento o ahorrar datos. En el resto se muestra el poster.
+const shouldLoadVideo = () => {
+  const connection = (navigator as Navigator & { connection?: { saveData?: boolean } })
+    .connection;
+
+  return (
+    window.matchMedia("(min-width: 769px)").matches &&
+    !window.matchMedia("(prefers-reduced-motion: reduce)").matches &&
+    !connection?.saveData
+  );
+};
+
 const Home: React.FC<HomeProps> = ({ onNavigate }) => {
+  const videoRef = useRef<HTMLVideoElement>(null);
+
+  useEffect(() => {
+    const video = videoRef.current;
+    if (!video || !shouldLoadVideo()) return;
+
+    video.src = "/video2.mp4";
+    video.play().catch(() => {
+      // Si el navegador bloquea la reproducción automática, queda el poster
+    });
+  }, []);
+
   return (
     <div className="home">
       {/* VIDEO DE FONDO */}
-      <motion.video
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 1.4 }}
+      <video
+        ref={videoRef}
         className="home-video"
-        src="/video2.mp4"
+        poster="/hero-poster.webp"
         autoPlay
         loop
         muted
         playsInline
+        preload="none"
+        aria-hidden="true"
       />
 
       {/* OSCURECIMIENTO + COLOR */}
@@ -30,7 +55,7 @@ const Home: React.FC<HomeProps> = ({ onNavigate }) => {
       <div className="home-glow home-glow-two"></div>
 
       {/* CONTENIDO */}
-      <main className="home-content">
+      <div className="home-content">
         <motion.div
           initial={{ opacity: 0, y: 25 }}
           animate={{ opacity: 1, y: 0 }}
@@ -96,7 +121,7 @@ const Home: React.FC<HomeProps> = ({ onNavigate }) => {
           <i></i>
           <span>Optimización</span>
         </motion.div>
-      </main>
+      </div>
 
       {/* INDICADOR DE SCROLL */}
       <motion.div
@@ -104,7 +129,7 @@ const Home: React.FC<HomeProps> = ({ onNavigate }) => {
         animate={{ opacity: 1 }}
         transition={{ delay: 1.5 }}
         className="home-scroll"
-        onClick={() => onNavigate("services")}
+        onClick={() => onNavigate("about")}
       >
         <span>Explorar</span>
 
