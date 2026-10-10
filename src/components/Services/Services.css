@@ -290,6 +290,30 @@
   box-shadow: 0 25px 60px rgba(0, 0, 0, 0.3);
 }
 
+/* Toda la tarjeta es clicable a través del enlace del título */
+
+.service-card-link {
+  color: inherit;
+  text-decoration: none;
+}
+
+.service-card-link::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  border-radius: inherit;
+}
+
+.service-card-link:focus-visible {
+  outline: none;
+}
+
+.service-card:has(.service-card-link:focus-visible) {
+  outline: 2px solid #38bdf8;
+  outline-offset: 3px;
+}
+
 /* =========================================
    NÚMERO
 ========================================= */
@@ -492,6 +516,16 @@
   font-size: 12px;
 
   text-align: center;
+}
+
+.services-bottom-link {
+  color: #38bdf8;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.services-bottom-link:hover {
+  text-decoration: underline;
 }
 
 /* =========================================

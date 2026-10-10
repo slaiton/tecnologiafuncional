@@ -1,7 +1,15 @@
 import { FaEnvelope, FaArrowUp } from "react-icons/fa";
-import { TiSocialFacebook, TiSocialInstagram } from "react-icons/ti";
+import { TiSocialFacebook } from "react-icons/ti";
+import { Link } from "react-router-dom";
+import { solutions } from "../../data/solutions";
+import { CONTACT_EMAIL, SOCIAL_PROFILES } from "../../seo/seo";
 
 import "./Footer.css";
+
+// Para agregar una red: sumarla a SOCIAL_PROFILES (seo.ts) y aquí con su ícono
+const socialLinks = [
+  { label: "Facebook", url: SOCIAL_PROFILES.facebook, icon: <TiSocialFacebook /> },
+];
 
 const Footer = () => {
   const scrollToTop = () => {
@@ -40,17 +48,32 @@ const Footer = () => {
             </div>
           </div>
 
+          {/* SOLUCIONES */}
+          <nav className="footer-column" aria-label="Soluciones">
+            <span className="footer-column-title">SOLUCIONES</span>
+
+            {solutions.map((solution) => (
+              <Link
+                key={solution.id}
+                to={solution.path}
+                className="footer-nav-link"
+              >
+                {solution.name}
+              </Link>
+            ))}
+          </nav>
+
           {/* CONTACTO */}
           <div className="footer-column">
             <span className="footer-column-title">CONTACTO</span>
 
             <a
-              href="mailto:contacto@tecnologiafuncional.com"
+              href={`mailto:${CONTACT_EMAIL}`}
               className="footer-contact-link"
             >
               <FaEnvelope />
 
-              <span>contacto@tecnologiafuncional.com</span>
+              <span>{CONTACT_EMAIL}</span>
             </a>
           </div>
 
@@ -59,25 +82,18 @@ const Footer = () => {
             <span className="footer-column-title">SÍGUENOS</span>
 
             <div className="footer-socials">
-              <a
-                href="#"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="Facebook"
-                className="footer-social"
-              >
-                <TiSocialFacebook />
-              </a>
-
-              <a
-                href="#"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="Instagram"
-                className="footer-social"
-              >
-                <TiSocialInstagram />
-              </a>
+              {socialLinks.map((social) => (
+                <a
+                  key={social.label}
+                  href={social.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={social.label}
+                  className="footer-social"
+                >
+                  {social.icon}
+                </a>
+              ))}
             </div>
           </div>
         </div>
