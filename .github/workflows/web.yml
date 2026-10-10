@@ -33,8 +33,27 @@ jobs:
         with:
           ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
 
+      # Si existe el secret SSH_KNOWN_HOSTS se usa (recomendado); si no, se consulta
+      # la huella del servidor con ssh-keyscan mostrando el motivo si falla.
       - name: Add server to known_hosts
-        run: ssh-keyscan -H ${{ secrets.SERVER_HOST }} >> ~/.ssh/known_hosts
+        env:
+          HOST: ${{ secrets.SERVER_HOST }}
+          KNOWN_HOSTS: ${{ secrets.SSH_KNOWN_HOSTS }}
+        run: |
+          mkdir -p ~/.ssh
+          if [ -n "$KNOWN_HOSTS" ]; then
+            echo "$KNOWN_HOSTS" >> ~/.ssh/known_hosts
+            exit 0
+          fi
+          if [ -z "$HOST" ] || [[ "$HOST" =~ [@:/[:space:]] ]]; then
+            echo "::error::SERVER_HOST está vacío o mal formado. Debe ser solo el dominio o la IP (sin usuario@, puerto, https:// ni espacios)."
+            exit 1
+          fi
+          if ! timeout 15 bash -c "echo > /dev/tcp/$HOST/22" 2>/dev/null; then
+            echo "::error::No hay conexión al puerto 22 de SERVER_HOST desde GitHub Actions. Revisa el Security Group de AWS o el firewall del servidor."
+            exit 1
+          fi
+          ssh-keyscan -T 15 -p 22 -H "$HOST" >> ~/.ssh/known_hosts
 
       # dist/* no incluye archivos ocultos, por eso .htaccess se copia aparte
       - name: Deploy via SCP
