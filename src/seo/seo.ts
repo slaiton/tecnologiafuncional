@@ -39,7 +39,7 @@ const homeMeta: PageMeta = {
   path: "/",
   title: "Tecnología Funcional | Desarrollo de software en Colombia",
   description:
-    "Empresa colombiana de tecnología. Software a la medida y soluciones de riesgo logístico, firma electrónica (TFirma) y beneficios para conductores.",
+    "Empresa colombiana de tecnología. Software a la medida, aseguramiento de despachos de carga, firma electrónica (TFirma) y beneficios para conductores.",
   jsonLd: [
     organization,
     {

@@ -29,65 +29,67 @@ export const solutions: Solution[] = [
     path: "/soluciones/riesgo-logistico/",
     number: "01",
     name: "Riesgo Logístico",
-    category: "GESTIÓN Y SEGURIDAD",
+    category: "ASEGURAMIENTO DE DESPACHOS",
     icon: FaShieldAlt,
     summary:
-      "Plataforma inteligente para la gestión y prevención del riesgo logístico. Automatiza procesos, centraliza información y facilita la toma de decisiones para una operación más segura y eficiente.",
+      "Conexión en línea automatizada para asegurar tus despachos de carga, con cobertura de Responsabilidad Civil Extracontractual (RCE) y asistencia como servicio de grúa ante averías.",
     seo: {
-      title: "Riesgo Logístico | Software de gestión del riesgo logístico",
+      title: "Riesgo Logístico | Seguro para despachos de carga y RCE",
       description:
-        "Plataforma para gestionar y prevenir el riesgo logístico: automatiza procesos, centraliza la información y apoya la toma de decisiones en operaciones de transporte.",
+        "Asegura tus despachos de carga con una conexión en línea automatizada. Cobertura de Responsabilidad Civil Extracontractual (RCE) y asistencia de grúa ante averías.",
       keywords: [
-        "software de gestión de riesgo logístico",
-        "prevención de riesgo en transporte de carga",
-        "seguridad logística",
+        "seguro para despachos de carga",
+        "póliza RCE transporte de carga",
+        "responsabilidad civil extracontractual vehículos de carga",
+        "asistencia grúa vehículos de carga",
       ],
     },
-    headline: "Software para la gestión y prevención del riesgo logístico",
-    lead: "Riesgo Logístico es una plataforma inteligente que automatiza procesos, centraliza la información de la operación y facilita la toma de decisiones para que tu cadena logística sea más segura y eficiente.",
+    headline: "Asegura tus despachos de carga en línea, de forma automática",
+    lead: "Riesgo Logístico conecta tu operación en línea para asegurar cada despacho de manera automatizada. Incluye cobertura de Responsabilidad Civil Extracontractual (RCE) y asistencia como servicio de grúa en caso de avería.",
     problem: {
-      title: "Una operación logística segura empieza con información confiable",
-      text: "Cuando los datos de la operación están dispersos entre hojas de cálculo, correos y sistemas aislados, identificar a tiempo un riesgo es difícil y cada decisión toma más de lo necesario. Riesgo Logístico reúne esa información en un solo lugar y automatiza las tareas repetitivas para que tu equipo se enfoque en prevenir.",
+      title: "Cada despacho que sale debe estar respaldado",
+      text: "Gestionar el aseguramiento despacho por despacho consume tiempo y deja espacio para olvidos, y un despacho sin respaldo expone a la empresa ante cualquier incidente en la vía. Con Riesgo Logístico el aseguramiento se hace a través de una conexión en línea automatizada, para que tu operación salga respaldada sin trámites adicionales.",
     },
     features: [
       {
-        title: "Información centralizada",
-        text: "Toda la información relevante de la operación disponible en una única plataforma, siempre actualizada.",
+        title: "Conexión en línea automatizada",
+        text: "Tus despachos se aseguran a través de una conexión en línea, sin gestionar cada uno de forma manual.",
       },
       {
-        title: "Procesos automatizados",
-        text: "Automatiza tareas operativas repetitivas y reduce los errores asociados al trabajo manual.",
+        title: "Cobertura de RCE",
+        text: "Cobertura de Responsabilidad Civil Extracontractual para responder por los daños que se causen a terceros durante la operación.",
       },
       {
-        title: "Toma de decisiones informada",
-        text: "Datos organizados para evaluar el riesgo y decidir con mayor rapidez y criterio.",
-      },
-      {
-        title: "Enfoque preventivo",
-        text: "Herramientas pensadas para anticiparse a los riesgos y no solo reaccionar ante ellos.",
+        title: "Asistencia ante averías",
+        text: "Beneficios de asistencia en carretera, como el servicio de grúa cuando el vehículo sufre una avería.",
       },
     ],
     audience: [
       "Empresas de transporte de carga",
-      "Operadores logísticos",
       "Generadores de carga",
-      "Aseguradoras",
+      "Operadores logísticos",
+      "Propietarios de vehículos de carga",
     ],
     faqs: [
       {
-        question: "¿Qué es la gestión del riesgo logístico?",
+        question: "¿Cómo se aseguran los despachos?",
         answer:
-          "Es el conjunto de prácticas para identificar, evaluar y prevenir los eventos que pueden afectar una operación de transporte y almacenamiento, como pérdidas, retrasos o incidentes de seguridad.",
+          "A través de una conexión en línea automatizada con tu operación, de modo que los despachos quedan asegurados sin tener que gestionarlos uno por uno.",
       },
       {
-        question: "¿Para qué tipo de empresas es Riesgo Logístico?",
+        question: "¿Qué es la cobertura de RCE?",
         answer:
-          "Para organizaciones que mueven o aseguran carga: transportadoras, operadores logísticos, generadores de carga y aseguradoras que necesitan controlar el riesgo de su operación.",
+          "La Responsabilidad Civil Extracontractual (RCE) cubre los daños que se causen a terceros, a sus bienes o a sus personas, durante la operación del vehículo.",
       },
       {
-        question: "¿Cómo puedo conocer la plataforma?",
+        question: "¿Qué asistencias incluye?",
         answer:
-          "Escríbenos desde el formulario de contacto y agendamos una asesoría para revisar tu operación y mostrarte cómo se adapta la plataforma.",
+          "Incluye beneficios de asistencia como el servicio de grúa en caso de avería del vehículo. Te contamos el detalle de las asistencias en la asesoría.",
+      },
+      {
+        question: "¿Cómo puedo empezar?",
+        answer:
+          "Escríbenos desde el formulario de contacto y agendamos una asesoría para revisar tu operación y conectar tus despachos.",
       },
     ],
     featured: true,
